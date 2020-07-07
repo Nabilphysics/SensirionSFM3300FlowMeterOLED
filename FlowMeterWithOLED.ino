@@ -144,6 +144,11 @@ void loop() {
 //  display.setCursor(93, 55);
 //  display.println(F("deg C"));
 //  
+
+  display.setTextSize(1);      // Normal 1:1 pixel scale
+  display.setTextColor(SSD1306_WHITE); // Draw white text
+  display.setCursor(15, 55);
+  display.print(F("www.cruxbd.com")); //1000/60  flow
   
   display.display();
   delay(100);
