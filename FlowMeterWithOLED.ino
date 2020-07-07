@@ -33,6 +33,9 @@
 #include "SFM3300.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+/////Config
+//#define flowWithTemperature //uncomment if you want to measure Flow with Temperature
+
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 
@@ -48,13 +51,6 @@ const float flowErrorSLM = 0.3;
 uint8_t sensorPowerPin = 5; // Since Sensor only consume 5mw power we could power it from Microcontroller Pin, You may use Transistor Switching
 int ret;
 
-//#define WINDOW_SIZE 5
-//
-//int INDEX = 0;
-//float VALUE = 0;
-//float SUM = 0;
-//float READINGS[WINDOW_SIZE];
-//float AVERAGED = 0;
 
 void setup() {
   Serial.begin(115200);
@@ -92,7 +88,8 @@ void loop() {
   float flow = ((float(result) - sensirion3300Offset) / scaleFactor)- flowErrorSLM;
   Serial.println(flow);
   
-////////////////// Temperature Measure /////////////
+////////////////// Temperature Measurement /////////////
+//Uncomment #define flowWithTemperature if you active temperature measurement and flow simaltaniously
 //  unsigned int temp = sensirionFlow.tempRead();
 //  float actualTemp = (float(temp) - 20000) / 100;
 //  Serial.print(" , ");
@@ -105,14 +102,6 @@ void loop() {
     sensirionFlow.init();
     delay(1000);
   }
-//  SUM = SUM - READINGS[INDEX];       // Remove the oldest entry from the sum
-//  VALUE = flow;        // Read the next sensor value
-//  READINGS[INDEX] = VALUE;           // Add the newest reading to the window
-//  SUM = SUM + VALUE;                 // Add the newest reading to the sum
-//  INDEX = (INDEX+1) % WINDOW_SIZE;   // Increment the index, and wrap to 0 if it exceeds the window size
-// 
-//  AVERAGED = SUM / WINDOW_SIZE;      // Divide the sum of the window by the window size for the result
- 
 
   
   display.clearDisplay();
@@ -145,10 +134,10 @@ void loop() {
 //  display.println(F("deg C"));
 //  
 
-  display.setTextSize(1);      // Normal 1:1 pixel scale
-  display.setTextColor(SSD1306_WHITE); // Draw white text
+  display.setTextSize(1);      
+  display.setTextColor(SSD1306_WHITE); 
   display.setCursor(15, 55);
-  display.print(F("www.cruxbd.com")); //1000/60  flow
+  display.print(F("www.cruxbd.com")); 
   
   display.display();
   delay(100);
@@ -156,7 +145,7 @@ void loop() {
 
 void cruxDisplay(){
   display.setTextSize(2);
-  display.setTextColor(SSD1306_WHITE); // Draw white text
+  display.setTextColor(SSD1306_WHITE); 
   display.setCursor(0, 0);
   display.println(F("CRUXBD.COM"));
   display.setTextSize(2);
