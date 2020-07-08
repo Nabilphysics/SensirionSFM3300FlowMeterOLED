@@ -7,3 +7,4 @@ Sensirion SFM3300 is a very sensative and accureate gas flow measurement device 
 
 1) Connecting This sensor is very tough. Because of the weired connector. We have 3D printed the connector and using pogo pin from old phone we made connector. 3D file in the repository. 
 2) Then connection is very easy like normal I2C connection.
+https://github.com/Nabilphysics/SensirionSFM3300FlowMeterOLED/blob/master/flowMeterDeviceCRUX.jpg
